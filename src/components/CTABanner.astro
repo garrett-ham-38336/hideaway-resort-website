@@ -1,0 +1,29 @@
+---
+interface Props {
+  title?: string;
+  subtitle?: string;
+  ctaText?: string;
+  ctaHref?: string;
+}
+
+const {
+  title = "Ready to Get Away?",
+  subtitle = "Browse our cabins and find your perfect lakeside escape on Table Rock Lake.",
+  ctaText = "Browse Cabins",
+  ctaHref = "/cabins",
+} = Astro.props;
+---
+
+<section class="bg-gradient-to-br from-lake-blue-dark via-lake-blue to-forest-green text-white">
+  <div class="container-site section-padding text-center">
+    <h2 class="font-heading text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3">
+      {title}
+    </h2>
+    <p class="text-base md:text-lg text-white/85 max-w-2xl mx-auto mb-8 leading-relaxed">
+      {subtitle}
+    </p>
+    <a href={ctaHref} class="btn btn-cta btn-lg">
+      {ctaText}
+    </a>
+  </div>
+</section>

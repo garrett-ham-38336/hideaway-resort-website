@@ -1,0 +1,170 @@
+@import "tailwindcss";
+
+/* ============================================
+   HIDEAWAY RESORT — Design Tokens (Tailwind v4)
+   ============================================ */
+
+@theme {
+  /* Primary Colors */
+  --color-lake-blue: #0E6FAF;
+  --color-lake-blue-dark: #094E7D;
+  --color-lake-blue-light: #E8F4FC;
+
+  /* Neutral Colors */
+  --color-slate-900: #1A2332;
+  --color-slate-700: #374151;
+  --color-slate-500: #6B7280;
+  --color-slate-300: #D1D5DB;
+  --color-slate-100: #F3F4F6;
+
+  /* Accent Colors */
+  --color-sunset-gold: #D4953A;
+  --color-sunset-gold-dark: #C08530;
+  --color-forest-green: #2D6A4F;
+  --color-cabin-brown: #6B4226;
+
+  /* Font Families */
+  --font-heading: "Montserrat", "Arial", "Helvetica", sans-serif;
+  --font-body: "Source Sans 3", "Arial", sans-serif;
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-slate-700);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--color-slate-900);
+  line-height: 1.2;
+}
+
+h1 { font-weight: 700; letter-spacing: -0.02em; }
+h2 { font-weight: 700; letter-spacing: -0.01em; }
+h3, h4 { font-weight: 600; }
+
+a {
+  color: var(--color-lake-blue);
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-lake-blue-dark);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+
+.container-site {
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .container-site {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+/* Section spacing */
+.section-padding {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+}
+
+/* ============================================
+   Button Styles
+   ============================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 0.25rem;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  line-height: 1.4;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background-color: var(--color-lake-blue);
+  color: white;
+  border-color: var(--color-lake-blue);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-lake-blue-dark);
+  border-color: var(--color-lake-blue-dark);
+  color: white;
+}
+
+.btn-secondary {
+  background-color: white;
+  color: var(--color-lake-blue);
+  border-color: var(--color-lake-blue);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-lake-blue-light);
+}
+
+.btn-cta {
+  background-color: var(--color-sunset-gold);
+  color: var(--color-slate-900);
+  border-color: var(--color-sunset-gold);
+  font-size: 1rem;
+  padding: 0.875rem 2.25rem;
+}
+
+.btn-cta:hover {
+  background-color: var(--color-sunset-gold-dark);
+  border-color: var(--color-sunset-gold-dark);
+}
+
+.btn-sm {
+  font-size: 0.8125rem;
+  padding: 0.5rem 1.25rem;
+}
+
+.btn-lg {
+  font-size: 1.0625rem;
+  padding: 1rem 2.5rem;
+}

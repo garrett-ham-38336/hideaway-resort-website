@@ -1,0 +1,139 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import CTABanner from "../components/CTABanner.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout
+  title="Policies"
+  description="Booking policies, cancellation terms, pet rules, and house rules for Hideaway Resort on Table Rock Lake."
+>
+  <Hero
+    title="Policies &amp; House Rules"
+    subtitle="Everything you need to know before your stay at Hideaway Resort."
+    size="sm"
+  />
+
+  <section class="section-padding bg-white">
+    <div class="container-site max-w-3xl mx-auto">
+      <div class="space-y-10">
+
+        <!-- Check-in/out -->
+        <div>
+          <h2 class="font-heading text-xl font-bold text-slate-900 mb-4">Check-in &amp; Check-out</h2>
+          <div class="bg-slate-100 rounded-lg p-6 space-y-3 text-sm text-slate-700">
+            <div class="flex justify-between">
+              <span class="font-medium text-slate-900">Check-in</span>
+              <span>3:00 PM</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="font-medium text-slate-900">Check-out</span>
+              <span>10:00 AM</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="font-medium text-slate-900">Method</span>
+              <span>Contactless — unique access code sent before arrival</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="font-medium text-slate-900">Minimum Age</span>
+              <span>Must be 21 or older to book</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment -->
+        <div>
+          <h2 class="font-heading text-xl font-bold text-slate-900 mb-4">Payment Terms</h2>
+          <p class="text-sm text-slate-700 leading-relaxed">
+            A deposit is due at the time of booking. The remaining balance is due
+            21 days prior to your arrival date. A refundable damage deposit may also
+            be required.
+          </p>
+        </div>
+
+        <!-- Cancellation -->
+        <div>
+          <h2 class="font-heading text-xl font-bold text-slate-900 mb-4">Cancellation Policy</h2>
+          <div class="space-y-3">
+            <div class="bg-slate-100 rounded-lg p-5">
+              <p class="text-sm font-medium text-slate-900 mb-1">60+ days before arrival</p>
+              <p class="text-sm text-slate-700">Full refund minus a $100 cancellation fee.</p>
+            </div>
+            <div class="bg-slate-100 rounded-lg p-5">
+              <p class="text-sm font-medium text-slate-900 mb-1">21–60 days before arrival</p>
+              <p class="text-sm text-slate-700">First installment (deposit) is forfeited.</p>
+            </div>
+            <div class="bg-slate-100 rounded-lg p-5">
+              <p class="text-sm font-medium text-slate-900 mb-1">Less than 21 days before arrival</p>
+              <p class="text-sm text-slate-700">Reservation is nonrefundable.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pets -->
+        <div>
+          <h2 class="font-heading text-xl font-bold text-slate-900 mb-4">Pet Policy</h2>
+          <p class="text-sm text-slate-700 leading-relaxed">
+            Pets are not allowed during the summer season, except for ADA-certified
+            service animals. During the off-peak season, pets may be permitted with
+            prior approval and a pet fee. Please contact us before booking if you
+            plan to bring a pet.
+          </p>
+        </div>
+
+        <!-- Smoking -->
+        <div>
+          <h2 class="font-heading text-xl font-bold text-slate-900 mb-4">Smoking Policy</h2>
+          <p class="text-sm text-slate-700 leading-relaxed">
+            Smoking is prohibited inside all units. A $300 cleaning fee will be
+            charged for any violations. Outdoor smoking areas are available.
+          </p>
+        </div>
+
+        <!-- Quiet Hours -->
+        <div>
+          <h2 class="font-heading text-xl font-bold text-slate-900 mb-4">Quiet Hours</h2>
+          <p class="text-sm text-slate-700 leading-relaxed">
+            Quiet hours are observed from 10:00 PM to 8:00 AM. Please be
+            respectful of neighboring guests during these hours.
+          </p>
+        </div>
+
+        <!-- Boat Slips -->
+        <div>
+          <h2 class="font-heading text-xl font-bold text-slate-900 mb-4">Boat Slips</h2>
+          <p class="text-sm text-slate-700 leading-relaxed">
+            Covered boat slips on our private dock are available for $15 per day.
+            Contact us to reserve a slip for your stay.
+          </p>
+        </div>
+
+        <!-- Linens -->
+        <div>
+          <h2 class="font-heading text-xl font-bold text-slate-900 mb-4">Linens &amp; Supplies</h2>
+          <p class="text-sm text-slate-700 leading-relaxed">
+            Towels, bed linens, and starter paper products are provided. For
+            longer stays, guests should bring extra supplies. Please bring your
+            own pool and beach towels.
+          </p>
+        </div>
+
+        <!-- Support -->
+        <div>
+          <h2 class="font-heading text-xl font-bold text-slate-900 mb-4">Guest Support</h2>
+          <p class="text-sm text-slate-700 leading-relaxed">
+            Our local team is available by phone and text during your stay. For
+            emergencies, a 24/7 helpline is available. Call us at
+            <a href={`tel:${site.phone}`} class="text-lake-blue font-medium">{site.phoneDisplay}</a>
+            or email
+            <a href={`mailto:${site.email}`} class="text-lake-blue font-medium">{site.email}</a>.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <CTABanner />
+</BaseLayout>

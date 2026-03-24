@@ -1,0 +1,113 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import CTABanner from "../components/CTABanner.astro";
+---
+
+<BaseLayout
+  title="Amenities"
+  description="Resort-wide amenities at Hideaway Resort: private dock, swimming pool, kayaks, paddleboards, fire pits, playground, and more — included with every cabin."
+>
+  <Hero
+    title="Resort Amenities"
+    subtitle="Everything you need for the perfect lake getaway — included with every cabin at Hideaway Resort."
+    size="md"
+  />
+
+  <!-- Water & Dock -->
+  <section class="section-padding bg-white">
+    <div class="container-site">
+      <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+        <div>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-slate-900 mb-4">
+            Water &amp; Dock
+          </h2>
+          <p class="text-base text-slate-700 leading-relaxed mb-6">
+            Table Rock Lake is your backyard at Hideaway Resort. Our private dock
+            has 16 covered boat slips available to rent, plus a swim dock with a
+            floating water pad and child hammock. Launch your boat from our gravel
+            ramp with trailer parking available nearby.
+          </p>
+          <ul class="space-y-2.5 text-sm text-slate-700">
+            <li class="flex items-start gap-2"><span class="text-lake-blue font-bold">&#10003;</span> Private dock with 16 covered boat slips ($15/day)</li>
+            <li class="flex items-start gap-2"><span class="text-lake-blue font-bold">&#10003;</span> Swim dock and floating water pad with child hammock</li>
+            <li class="flex items-start gap-2"><span class="text-lake-blue font-bold">&#10003;</span> Gravel boat launch with trailer parking</li>
+            <li class="flex items-start gap-2"><span class="text-lake-blue font-bold">&#10003;</span> Complimentary kayaks, pedal boats, and paddleboards</li>
+            <li class="flex items-start gap-2"><span class="text-lake-blue font-bold">&#10003;</span> Foam noodles and water trampoline</li>
+          </ul>
+        </div>
+        <div class="rounded-lg overflow-hidden h-64 md:h-80 bg-gradient-to-br from-lake-blue to-lake-blue-dark flex items-center justify-center">
+          <span class="text-white/20 font-heading text-lg">Dock Photo</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pool & Recreation -->
+  <section class="section-padding bg-slate-100">
+    <div class="container-site">
+      <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+        <div class="order-2 md:order-1 rounded-lg overflow-hidden h-64 md:h-80 bg-gradient-to-br from-forest-green to-lake-blue flex items-center justify-center">
+          <span class="text-white/20 font-heading text-lg">Pool Photo</span>
+        </div>
+        <div class="order-1 md:order-2">
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-slate-900 mb-4">
+            Pool &amp; Recreation
+          </h2>
+          <p class="text-base text-slate-700 leading-relaxed mb-6">
+            Cool off in our lakeside swimming pool with sweeping views of the lake
+            and bluffs. When the sun goes down, gather around one of two fire pit
+            areas or fire up the charcoal grills at our covered picnic pavilions.
+          </p>
+          <ul class="space-y-2.5 text-sm text-slate-700">
+            <li class="flex items-start gap-2"><span class="text-lake-blue font-bold">&#10003;</span> Lakeside swimming pool with lake and bluff views</li>
+            <li class="flex items-start gap-2"><span class="text-lake-blue font-bold">&#10003;</span> Two fire pit areas</li>
+            <li class="flex items-start gap-2"><span class="text-lake-blue font-bold">&#10003;</span> Two covered picnic pavilions with lake views</li>
+            <li class="flex items-start gap-2"><span class="text-lake-blue font-bold">&#10003;</span> Charcoal grills throughout property</li>
+            <li class="flex items-start gap-2"><span class="text-lake-blue font-bold">&#10003;</span> Playground with swings and sandbox</li>
+            <li class="flex items-start gap-2"><span class="text-lake-blue font-bold">&#10003;</span> Cornhole and tetherball</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Guest Services -->
+  <section class="section-padding bg-white">
+    <div class="container-site">
+      <SectionHeading
+        title="Guest Services"
+        subtitle="Every detail covered so you can focus on relaxing."
+      />
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-slate-100 rounded-lg p-6">
+          <h3 class="font-heading text-base font-semibold text-slate-900 mb-2">Complimentary Wi-Fi</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">High-speed internet available throughout the entire resort — stream, work, or stay connected.</p>
+        </div>
+        <div class="bg-slate-100 rounded-lg p-6">
+          <h3 class="font-heading text-base font-semibold text-slate-900 mb-2">Satellite Television</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">Premium and local channels in every cabin for those rainy-day movie marathons.</p>
+        </div>
+        <div class="bg-slate-100 rounded-lg p-6">
+          <h3 class="font-heading text-base font-semibold text-slate-900 mb-2">On-Site Laundry</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">Laundry facilities available on the property — pack light and stay longer.</p>
+        </div>
+        <div class="bg-slate-100 rounded-lg p-6">
+          <h3 class="font-heading text-base font-semibold text-slate-900 mb-2">Linens &amp; Towels</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">Bed linens, bath towels, and starter paper products provided in every cabin.</p>
+        </div>
+        <div class="bg-slate-100 rounded-lg p-6">
+          <h3 class="font-heading text-base font-semibold text-slate-900 mb-2">Fully Equipped Kitchens</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">Everything you need to cook your catch of the day or prepare a family meal.</p>
+        </div>
+        <div class="bg-slate-100 rounded-lg p-6">
+          <h3 class="font-heading text-base font-semibold text-slate-900 mb-2">24/7 Guest Support</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">Local team available by phone and text. Contactless check-in with a unique access code.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTABanner />
+</BaseLayout>

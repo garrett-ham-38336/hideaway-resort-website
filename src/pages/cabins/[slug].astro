@@ -1,0 +1,222 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CTABanner from "../../components/CTABanner.astro";
+import JsonLd from "../../components/JsonLd.astro";
+import { cabins } from "../../data/cabins";
+import type { Cabin } from "../../data/cabins";
+import { site } from "../../data/site";
+
+export function getStaticPaths() {
+  return cabins.map((cabin) => ({
+    params: { slug: cabin.slug },
+    props: { cabin },
+  }));
+}
+
+interface Props {
+  cabin: Cabin;
+}
+
+const { cabin } = Astro.props;
+
+const accommodationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Accommodation",
+  name: cabin.name,
+  description: `${cabin.name} at Hideaway Resort — ${cabin.config}, sleeps ${cabin.sleeps}. ${cabin.tagline}`,
+  url: `${site.url}/cabins/${cabin.slug}`,
+  numberOfBedrooms: cabin.bedrooms,
+  numberOfBathroomsTotal: cabin.bathrooms,
+  occupancy: {
+    "@type": "QuantitativeValue",
+    value: cabin.sleeps,
+  },
+  containedInPlace: {
+    "@type": "LodgingBusiness",
+    name: site.name,
+    url: site.url,
+  },
+  petsAllowed: cabin.petFriendly,
+};
+---
+
+<BaseLayout
+  title={cabin.name}
+  description={`${cabin.name} at Hideaway Resort — ${cabin.config}, sleeps ${cabin.sleeps}. ${cabin.tagline}`}
+>
+  <JsonLd slot="head" data={accommodationSchema} />
+  <!-- Hero image area -->
+  <section class="relative h-64 md:h-96 bg-gradient-to-br from-lake-blue-dark via-lake-blue to-forest-green flex items-center justify-center">
+    <div class="absolute inset-0 flex items-center justify-center text-white/10 text-8xl font-heading">
+      {cabin.name.charAt(0)}
+    </div>
+    <div class="relative z-10 text-center text-white">
+      <h1 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-2">
+        {cabin.name}
+      </h1>
+      <p class="text-lg text-white/80">{cabin.config} &middot; Sleeps {cabin.sleeps}</p>
+    </div>
+  </section>
+
+  <!-- Quick Stats + Booking -->
+  <section class="bg-white border-b border-slate-300">
+    <div class="container-site py-4 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex flex-wrap gap-6 text-sm text-slate-700">
+        <span class="flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-lake-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+          {cabin.bedrooms} {cabin.bedrooms === 1 ? "Bedroom" : "Bedrooms"}
+        </span>
+        <span class="flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-lake-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          {cabin.bathrooms} {cabin.bathrooms === 1 ? "Bathroom" : "Bathrooms"}
+        </span>
+        <span class="flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-lake-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+          Sleeps {cabin.sleeps}
+        </span>
+        {cabin.petFriendly && (
+          <span class="flex items-center gap-1.5 text-forest-green">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+            Pet Friendly
+          </span>
+        )}
+      </div>
+      {cabin.bookingUrl ? (
+        <a
+          href={cabin.bookingUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-cta"
+        >
+          Book This Cabin
+        </a>
+      ) : (
+        <span class="btn bg-slate-100 text-slate-500 border-slate-300 cursor-default">
+          Coming Soon
+        </span>
+      )}
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="section-padding bg-white">
+    <div class="container-site">
+      <div class="grid lg:grid-cols-3 gap-10 lg:gap-16">
+        <!-- Description (2/3 width) -->
+        <div class="lg:col-span-2">
+          <h2 class="font-heading text-xl md:text-2xl font-bold text-slate-900 mb-4">
+            About {cabin.name}
+          </h2>
+          <p class="text-base text-slate-700 leading-relaxed mb-6">
+            {cabin.tagline}. This cabin is part of Hideaway Resort's collection of
+            lakefront properties on Table Rock Lake near Galena, Missouri. Every
+            cabin includes a fully equipped kitchen, complimentary Wi-Fi, and access
+            to all resort amenities including the private dock, swimming pool,
+            kayaks, paddleboards, and fire pit areas.
+          </p>
+
+          {cabin.slug === "duplex-cabin" && (
+            <div class="bg-lake-blue-light border border-lake-blue/20 rounded-lg p-5 mb-6">
+              <h3 class="font-heading text-base font-semibold text-slate-900 mb-2">
+                The Duplex Cabin
+              </h3>
+              <p class="text-sm text-slate-700 leading-relaxed">
+                This duplex cabin combines two fully equipped units — Skyline and
+                Trails End — into one spacious 4-bedroom, 2-bathroom property that
+                sleeps up to 16 guests. Perfect for family reunions, group retreats,
+                and large gatherings. Dogs welcome (up to 2, with prior approval).
+              </p>
+            </div>
+          )}
+
+          <h3 class="font-heading text-lg font-semibold text-slate-900 mb-3 mt-8">
+            Resort Amenities Included
+          </h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 text-sm text-slate-700">
+            <p class="flex items-start gap-2"><span class="text-lake-blue">&#10003;</span> Private dock with 16 covered boat slips</p>
+            <p class="flex items-start gap-2"><span class="text-lake-blue">&#10003;</span> Lakeside swimming pool</p>
+            <p class="flex items-start gap-2"><span class="text-lake-blue">&#10003;</span> Complimentary kayaks &amp; paddleboards</p>
+            <p class="flex items-start gap-2"><span class="text-lake-blue">&#10003;</span> Water trampoline &amp; swim dock</p>
+            <p class="flex items-start gap-2"><span class="text-lake-blue">&#10003;</span> Two fire pit areas</p>
+            <p class="flex items-start gap-2"><span class="text-lake-blue">&#10003;</span> Two covered picnic pavilions</p>
+            <p class="flex items-start gap-2"><span class="text-lake-blue">&#10003;</span> Charcoal grills</p>
+            <p class="flex items-start gap-2"><span class="text-lake-blue">&#10003;</span> Playground &amp; lawn games</p>
+            <p class="flex items-start gap-2"><span class="text-lake-blue">&#10003;</span> Complimentary Wi-Fi</p>
+            <p class="flex items-start gap-2"><span class="text-lake-blue">&#10003;</span> Fully equipped kitchen</p>
+            <p class="flex items-start gap-2"><span class="text-lake-blue">&#10003;</span> Towels &amp; linens provided</p>
+            <p class="flex items-start gap-2"><span class="text-lake-blue">&#10003;</span> Contactless check-in</p>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="lg:col-span-1">
+          <div class="bg-slate-100 rounded-lg p-6 sticky top-24">
+            <h3 class="font-heading text-lg font-semibold text-slate-900 mb-4">
+              Quick Details
+            </h3>
+            <dl class="space-y-3 text-sm">
+              <div class="flex justify-between">
+                <dt class="text-slate-500">Bedrooms</dt>
+                <dd class="font-medium text-slate-900">{cabin.bedrooms}</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="text-slate-500">Bathrooms</dt>
+                <dd class="font-medium text-slate-900">{cabin.bathrooms}</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="text-slate-500">Sleeps</dt>
+                <dd class="font-medium text-slate-900">{cabin.sleeps}</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="text-slate-500">Check-in</dt>
+                <dd class="font-medium text-slate-900">3:00 PM</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="text-slate-500">Check-out</dt>
+                <dd class="font-medium text-slate-900">10:00 AM</dd>
+              </div>
+              {cabin.petFriendly && (
+                <div class="flex justify-between">
+                  <dt class="text-slate-500">Pets</dt>
+                  <dd class="font-medium text-forest-green">Dogs welcome</dd>
+                </div>
+              )}
+            </dl>
+
+            <hr class="my-5 border-slate-300" />
+
+            {cabin.bookingUrl ? (
+              <a
+                href={cabin.bookingUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-cta w-full text-center"
+              >
+                Book {cabin.name}
+              </a>
+            ) : (
+              <p class="text-sm text-slate-500 text-center">
+                This cabin is not yet available for booking. Check back soon!
+              </p>
+            )}
+
+            <p class="text-xs text-slate-500 text-center mt-3">
+              Questions? Call <a href="tel:+14793646756" class="text-lake-blue">(479) 364-6756</a>
+            </p>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- Back to all cabins -->
+  <section class="bg-slate-100 py-6">
+    <div class="container-site text-center">
+      <a href="/cabins" class="btn btn-secondary">
+        &larr; View All Cabins
+      </a>
+    </div>
+  </section>
+
+  <CTABanner />
+</BaseLayout>

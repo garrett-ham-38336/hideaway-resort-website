@@ -1,0 +1,146 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import CabinCard from "../components/CabinCard.astro";
+import AmenityIcon from "../components/AmenityIcon.astro";
+import CTABanner from "../components/CTABanner.astro";
+import { featuredCabins } from "../data/cabins";
+import { site } from "../data/site";
+---
+
+<BaseLayout title="Home">
+  <!-- Hero -->
+  <Hero
+    title="Your Lakeside Escape Awaits"
+    subtitle="12 unique cabins on Table Rock Lake. Private dock, swimming pool, and the peace of the Ozarks."
+    ctaText="Browse Cabins"
+    ctaHref="/cabins"
+    size="lg"
+  />
+
+  <!-- Intro -->
+  <section class="section-padding bg-white">
+    <div class="container-site text-center max-w-3xl mx-auto">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-slate-900 mb-4">
+        Welcome to Hideaway Resort
+      </h2>
+      <p class="text-base md:text-lg text-slate-700 leading-relaxed">
+        Nestled on a quiet peninsula of Table Rock Lake near Galena, Missouri,
+        Hideaway Resort offers lakefront cabins with stunning views, complimentary
+        water toys, and the kind of quiet that's hard to find. Whether you're here
+        for a weekend fishing trip or a week of doing absolutely nothing, we have
+        the right spot for you.
+      </p>
+    </div>
+  </section>
+
+  <!-- Featured Cabins -->
+  <section class="section-padding bg-slate-100">
+    <div class="container-site">
+      <SectionHeading
+        title="Featured Cabins"
+        subtitle="From cozy cottages to our 12-guest lodge — every cabin comes with lake views, a full kitchen, and resort amenities."
+      />
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        {featuredCabins.map((cabin) => (
+          <CabinCard cabin={cabin} />
+        ))}
+      </div>
+      <div class="text-center mt-10">
+        <a href="/cabins" class="btn btn-primary">
+          View All Cabins
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Amenities Highlights -->
+  <section class="section-padding bg-white">
+    <div class="container-site">
+      <SectionHeading
+        title="Resort Amenities"
+        subtitle="Everything you need for a perfect lake getaway — included with every cabin."
+      />
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <AmenityIcon
+          icon='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17h1m16 0h1M5.6 10.6l.7.7m12-.7-.7.7M12 4v1m-6.4 12H5m14 0h-.6M6.3 6.3l.7.7m10-.7-.7.7"/><path d="M12 12a4 4 0 0 0-4 4h8a4 4 0 0 0-4-4z"/></svg>'
+          title="Private Dock"
+          description="16 covered boat slips"
+        />
+        <AmenityIcon
+          icon='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6s1.5-2 5-2 5 2 5 2 1.5-2 5-2 5 2 5 2v14s-1.5-2-5-2-5 2-5 2-1.5-2-5-2-5 2-5 2V6z"/></svg>'
+          title="Swimming Pool"
+          description="Lakeside with bluff views"
+        />
+        <AmenityIcon
+          icon='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/></svg>'
+          title="Free Wi-Fi"
+          description="Throughout the resort"
+        />
+        <AmenityIcon
+          icon='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20h.01M7 20v-4"/><path d="M12 20v-8"/><path d="M17 20V8"/><path d="M22 4v16"/></svg>'
+          title="Kayaks &amp; SUPs"
+          description="Complimentary water toys"
+        />
+        <AmenityIcon
+          icon='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>'
+          title="Fire Pits"
+          description="Two lakeside fire areas"
+        />
+        <AmenityIcon
+          icon='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>'
+          title="Full Kitchens"
+          description="In every cabin"
+        />
+      </div>
+      <div class="text-center mt-10">
+        <a href="/amenities" class="btn btn-secondary">
+          All Amenities
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location Teaser -->
+  <section class="section-padding bg-slate-100">
+    <div class="container-site">
+      <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+        <div>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-slate-900 mb-4">
+            On the Shores of Table Rock Lake
+          </h2>
+          <p class="text-base text-slate-700 leading-relaxed mb-4">
+            Hideaway Resort sits on a quiet peninsula with water on three sides —
+            sweeping lake views and tranquil sunsets that are hard to beat. We're
+            just 20 minutes from Silver Dollar City and 30 minutes from Branson's
+            theaters and restaurants.
+          </p>
+          <ul class="space-y-2 text-sm text-slate-700 mb-6">
+            <li class="flex items-start gap-2">
+              <span class="text-lake-blue font-bold mt-0.5">&#8250;</span>
+              <span>850+ miles of shoreline and 43,000 acres of lake</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-lake-blue font-bold mt-0.5">&#8250;</span>
+              <span>Top 100 bass fishing lake — fishable year-round</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-lake-blue font-bold mt-0.5">&#8250;</span>
+              <span>15-20 min to Silver Dollar City, 30 min to Branson</span>
+            </li>
+          </ul>
+          <a href="/location" class="btn btn-primary">
+            Explore the Area
+          </a>
+        </div>
+        <div class="relative rounded-lg overflow-hidden h-72 md:h-96 bg-gradient-to-br from-lake-blue to-forest-green flex items-center justify-center">
+          <span class="text-white/20 font-heading text-xl">Map / Photo</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CTABanner />
+</BaseLayout>

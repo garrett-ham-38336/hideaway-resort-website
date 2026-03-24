@@ -1,0 +1,115 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import JsonLd from "../components/JsonLd.astro";
+import { site } from "../data/site";
+import "../styles/global.css";
+
+// Site-wide LodgingBusiness JSON-LD
+const lodgingBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LodgingBusiness",
+  name: site.name,
+  description: site.description,
+  url: site.url,
+  telephone: site.phone,
+  email: site.email,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: site.address.street,
+    addressLocality: site.address.city,
+    addressRegion: site.address.state,
+    postalCode: site.address.zip,
+    addressCountry: "US",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: site.coordinates.lat,
+    longitude: site.coordinates.lng,
+  },
+  sameAs: [
+    site.social.facebook,
+    site.social.instagram,
+    site.social.youtube,
+    site.social.twitter,
+  ],
+  amenityFeature: [
+    { "@type": "LocationFeatureSpecification", name: "Private Dock", value: true },
+    { "@type": "LocationFeatureSpecification", name: "Swimming Pool", value: true },
+    { "@type": "LocationFeatureSpecification", name: "Free WiFi", value: true },
+    { "@type": "LocationFeatureSpecification", name: "Kayaks", value: true },
+    { "@type": "LocationFeatureSpecification", name: "Fire Pits", value: true },
+    { "@type": "LocationFeatureSpecification", name: "Playground", value: true },
+  ],
+};
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  canonicalUrl?: string;
+}
+
+const {
+  title,
+  description = site.description,
+  ogImage = "/images/og-default.jpg",
+  canonicalUrl,
+} = Astro.props;
+
+const pageTitle = title === "Home"
+  ? `${site.name} — ${site.tagline}`
+  : `${title} | ${site.name}`;
+
+const canonical = canonicalUrl || Astro.url.href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+
+    <title>{pageTitle}</title>
+
+    <link rel="canonical" href={canonical} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Source+Sans+3:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={site.name} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- JSON-LD Structured Data -->
+    <JsonLd data={lodgingBusinessSchema} />
+
+    <slot name="head" />
+  </head>
+  <body class="min-h-screen flex flex-col bg-white">
+    <Header />
+    <main class="flex-1 pt-16 md:pt-20">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

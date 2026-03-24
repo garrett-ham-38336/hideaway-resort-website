@@ -1,0 +1,180 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import CTABanner from "../components/CTABanner.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout
+  title="Location"
+  description="Hideaway Resort is located on a quiet peninsula of Table Rock Lake near Galena, Missouri — 20 min from Silver Dollar City, 30 min from Branson."
+>
+  <Hero
+    title="Location &amp; Things to Do"
+    subtitle="On a quiet peninsula of Table Rock Lake — with water on three sides and Branson just 30 minutes away."
+    size="md"
+  />
+
+  <!-- Map & Getting There -->
+  <section class="section-padding bg-white">
+    <div class="container-site">
+      <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-start">
+        <div>
+          <h2 class="font-heading text-2xl md:text-3xl font-bold text-slate-900 mb-4">
+            Getting Here
+          </h2>
+          <p class="text-base text-slate-700 leading-relaxed mb-6">
+            Hideaway Resort sits at the end of Highway Y on a peninsula off Route 76,
+            near Galena, Missouri. The resort has water on three sides with sweeping
+            lake views and tranquil sunsets.
+          </p>
+
+          <div class="space-y-4 text-sm text-slate-700">
+            <div>
+              <h3 class="font-heading font-semibold text-slate-900 mb-1">Address</h3>
+              <p>{site.address.full}</p>
+            </div>
+            <div>
+              <h3 class="font-heading font-semibold text-slate-900 mb-1">Driving Distances</h3>
+              <p>15-20 minutes from Silver Dollar City and Branson West</p>
+              <p>30 minutes from Branson theaters, restaurants, and attractions</p>
+            </div>
+            <div>
+              <h3 class="font-heading font-semibold text-slate-900 mb-1">Nearest Airports</h3>
+              <p>Branson Airport (BKG)</p>
+              <p>Springfield-Branson National Airport (SGF)</p>
+            </div>
+            <div>
+              <h3 class="font-heading font-semibold text-slate-900 mb-1">Parking</h3>
+              <p>Free parking at all cabins. Trailer parking available near the dock.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Map Embed -->
+        <div class="rounded-lg overflow-hidden h-72 md:h-96 bg-slate-100">
+          <iframe
+            src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3200!2d${site.coordinates.lng}!3d${site.coordinates.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzbCsDkuOCdOIDkzwrAyOS45J1c!5e0!3m2!1sen!2sus!4v1`}
+            width="100%"
+            height="100%"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Hideaway Resort location on Google Maps"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Things to Do: On-Site -->
+  <section class="section-padding bg-slate-100">
+    <div class="container-site">
+      <SectionHeading
+        title="On-Site &amp; On the Lake"
+        subtitle="Table Rock Lake is a top-100 bass fishing lake with over 850 miles of shoreline and 43,000 acres of water."
+      />
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+        {[
+          "Bass Fishing (year-round)",
+          "Boating &amp; Sailing",
+          "Wakeboarding &amp; Water Skiing",
+          "Paddleboarding",
+          "Swimming",
+          "Cliff Diving",
+          "Kayaking &amp; Pedal Boats",
+          "Scenic Sunset Viewing",
+        ].map((activity) => (
+          <div class="bg-white rounded-lg p-4 text-center text-sm font-medium text-slate-700">
+            <Fragment set:html={activity} />
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-10 bg-white rounded-lg p-6 md:p-8">
+        <h3 class="font-heading text-lg font-semibold text-slate-900 mb-3">Table Rock Lake Facts</h3>
+        <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div>
+            <p class="text-2xl font-heading font-bold text-lake-blue">850+</p>
+            <p class="text-sm text-slate-500">Miles of Shoreline</p>
+          </div>
+          <div>
+            <p class="text-2xl font-heading font-bold text-lake-blue">43,000+</p>
+            <p class="text-sm text-slate-500">Acres of Surface Area</p>
+          </div>
+          <div>
+            <p class="text-2xl font-heading font-bold text-lake-blue">200+</p>
+            <p class="text-sm text-slate-500">Feet Deep</p>
+          </div>
+          <div>
+            <p class="text-2xl font-heading font-bold text-lake-blue">Top 100</p>
+            <p class="text-sm text-slate-500">Bass Fishing Lake</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Branson & Area -->
+  <section class="section-padding bg-white">
+    <div class="container-site">
+      <SectionHeading
+        title="Branson &amp; the Ozarks"
+        subtitle="World-class entertainment and outdoor adventure are just a short drive away."
+      />
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-slate-100 rounded-lg p-6">
+          <h3 class="font-heading text-base font-semibold text-slate-900 mb-2">Silver Dollar City</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">Award-winning theme park just 18 miles away with rides, shows, and Ozark craftsmanship.</p>
+        </div>
+        <div class="bg-slate-100 rounded-lg p-6">
+          <h3 class="font-heading text-base font-semibold text-slate-900 mb-2">76 Strip &amp; Live Shows</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">Branson's famous entertainment district is 20 miles away with dozens of live shows nightly.</p>
+        </div>
+        <div class="bg-slate-100 rounded-lg p-6">
+          <h3 class="font-heading text-base font-semibold text-slate-900 mb-2">Shopping &amp; Dining</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">Outlet malls, craft stores, and restaurants for every taste throughout the Branson area.</p>
+        </div>
+        <div class="bg-slate-100 rounded-lg p-6">
+          <h3 class="font-heading text-base font-semibold text-slate-900 mb-2">Hiking &amp; Biking</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">Miles of Ozark trails through forests and along lakeshores for every skill level.</p>
+        </div>
+        <div class="bg-slate-100 rounded-lg p-6">
+          <h3 class="font-heading text-base font-semibold text-slate-900 mb-2">Championship Golf</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">Several championship courses in the Branson area with stunning Ozark mountain views.</p>
+        </div>
+        <div class="bg-slate-100 rounded-lg p-6">
+          <h3 class="font-heading text-base font-semibold text-slate-900 mb-2">Hideaway Marina</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">Just down the road — convenience store, boat rentals (fishing boats, pontoons, jet skis).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Boating & Fishing Info -->
+  <section class="section-padding bg-slate-100">
+    <div class="container-site max-w-3xl mx-auto">
+      <h2 class="font-heading text-xl md:text-2xl font-bold text-slate-900 mb-6 text-center">
+        Boating &amp; Fishing Info
+      </h2>
+      <div class="space-y-4 text-sm text-slate-700">
+        <div class="bg-white rounded-lg p-5">
+          <h3 class="font-heading font-semibold text-slate-900 mb-1">Missouri Boater Education</h3>
+          <p>Anyone born after January 1, 1984 is required to pass a boater education course to operate a motorized vessel on Missouri waters.</p>
+        </div>
+        <div class="bg-white rounded-lg p-5">
+          <h3 class="font-heading font-semibold text-slate-900 mb-1">Fishing Licenses</h3>
+          <p>A valid Missouri fishing license is required (exceptions: residents 65+ and anyone under 15). Licenses are available for purchase online.</p>
+        </div>
+        <div class="bg-white rounded-lg p-5">
+          <h3 class="font-heading font-semibold text-slate-900 mb-1">Boat Slip Rentals</h3>
+          <p>Hideaway Resort's private dock has 16 covered boat slips available to guests at $15 per day. Contact us to reserve yours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CTABanner />
+</BaseLayout>

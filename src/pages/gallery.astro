@@ -1,0 +1,90 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import CTABanner from "../components/CTABanner.astro";
+
+// Gallery sections with placeholder structure
+// Photos will be sourced from existing site and Guesty listings
+const gallerySections = [
+  {
+    title: "Resort & Grounds",
+    description: "Our lakefront property, pool, dock, fire pits, and common areas.",
+    count: 12,
+    gradient: "from-lake-blue to-lake-blue-dark",
+  },
+  {
+    title: "Lake & Views",
+    description: "Table Rock Lake sunsets, bluff views, and water activities.",
+    count: 8,
+    gradient: "from-lake-blue-dark to-forest-green",
+  },
+  {
+    title: "Cabins",
+    description: "Interior and exterior shots of our lakefront cabins.",
+    count: 12,
+    gradient: "from-forest-green to-lake-blue",
+  },
+  {
+    title: "Guest Photos",
+    description: "Memories shared by our guests — tagged #WeLoveHideaway.",
+    count: 8,
+    gradient: "from-sunset-gold to-cabin-brown",
+  },
+];
+---
+
+<BaseLayout
+  title="Gallery"
+  description="Photos of Hideaway Resort's lakefront cabins, private dock, swimming pool, and Table Rock Lake views."
+>
+  <Hero
+    title="Photo Gallery"
+    subtitle="Take a virtual tour of Hideaway Resort and Table Rock Lake."
+    size="sm"
+  />
+
+  {gallerySections.map((section, sIdx) => (
+    <section class:list={["section-padding", sIdx % 2 === 0 ? "bg-white" : "bg-slate-100"]}>
+      <div class="container-site">
+        <SectionHeading title={section.title} subtitle={section.description} />
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+          {Array.from({ length: section.count }).map((_, i) => (
+            <div
+              class:list={[
+                "rounded-lg overflow-hidden aspect-[4/3] flex items-center justify-center bg-gradient-to-br",
+                section.gradient,
+                i === 0 && "md:col-span-2 md:row-span-2 aspect-square",
+              ]}
+            >
+              <span class="text-white/15 font-heading text-sm">Photo {i + 1}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- #WeLoveHideaway -->
+  <section class="section-padding bg-lake-blue-light">
+    <div class="container-site text-center">
+      <h2 class="font-heading text-2xl md:text-3xl font-bold text-slate-900 mb-3">
+        #WeLoveHideaway
+      </h2>
+      <p class="text-base text-slate-700 max-w-xl mx-auto mb-6">
+        Share your Hideaway Resort memories on social media with
+        <strong>#WeLoveHideaway</strong> and your photos may be featured here!
+      </p>
+      <div class="flex justify-center gap-4">
+        <a href="https://instagram.com/weekendermanagement/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          Follow on Instagram
+        </a>
+        <a href="https://facebook.com/weekendermanagement" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          Follow on Facebook
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <CTABanner />
+</BaseLayout>

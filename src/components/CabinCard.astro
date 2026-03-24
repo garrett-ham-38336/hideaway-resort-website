@@ -1,0 +1,67 @@
+---
+import type { Cabin } from "../data/cabins";
+
+interface Props {
+  cabin: Cabin;
+}
+
+const { cabin } = Astro.props;
+---
+
+<article class="group bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden hover:-translate-y-0.5">
+  <!-- Image placeholder — will be replaced with actual Guesty photos -->
+  <a href={`/cabins/${cabin.slug}`} class="block">
+    <div class="relative h-52 md:h-56 bg-gradient-to-br from-lake-blue via-lake-blue-dark to-forest-green overflow-hidden">
+      <div class="absolute inset-0 flex items-center justify-center text-white/20 text-6xl font-heading">
+        {cabin.name.charAt(0)}
+      </div>
+      <div class="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/10 transition-colors duration-300" />
+      {cabin.bookingUrl === null && (
+        <span class="absolute top-3 right-3 bg-sunset-gold text-slate-900 text-xs font-heading font-semibold px-2.5 py-1 rounded">
+          Coming Soon
+        </span>
+      )}
+      {cabin.petFriendly && (
+        <span class="absolute top-3 left-3 bg-forest-green text-white text-xs font-heading font-semibold px-2.5 py-1 rounded">
+          Pet Friendly
+        </span>
+      )}
+    </div>
+  </a>
+
+  <div class="p-5 md:p-6">
+    <a href={`/cabins/${cabin.slug}`} class="no-underline">
+      <h3 class="font-heading text-lg md:text-xl font-semibold text-slate-900 mb-1.5 group-hover:text-lake-blue transition-colors">
+        {cabin.name}
+      </h3>
+    </a>
+
+    <!-- Meta -->
+    <div class="flex flex-wrap gap-x-4 gap-y-1 text-sm text-slate-500 mb-3">
+      <span>{cabin.bedrooms} {cabin.bedrooms === 1 ? "Bed" : "Beds"}</span>
+      <span>{cabin.bathrooms} {cabin.bathrooms === 1 ? "Bath" : "Baths"}</span>
+      <span>Sleeps {cabin.sleeps}</span>
+    </div>
+
+    <p class="text-sm text-slate-500 leading-relaxed mb-4">
+      {cabin.tagline}
+    </p>
+
+    <!-- Actions -->
+    <div class="flex items-center gap-3">
+      <a href={`/cabins/${cabin.slug}`} class="btn btn-primary btn-sm flex-1 text-center">
+        View Details
+      </a>
+      {cabin.bookingUrl && (
+        <a
+          href={cabin.bookingUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-cta btn-sm"
+        >
+          Book Now
+        </a>
+      )}
+    </div>
+  </div>
+</article>
