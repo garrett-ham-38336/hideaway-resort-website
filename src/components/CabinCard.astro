@@ -1,20 +1,34 @@
 ---
 import type { Cabin } from "../data/cabins";
+import { getPhotosForCabin, guestyPhoto } from "../data/photos";
 
 interface Props {
   cabin: Cabin;
 }
 
 const { cabin } = Astro.props;
+const photos = getPhotosForCabin(cabin.slug);
+const heroUrl = photos ? guestyPhoto(photos.hero, "card") : null;
 ---
 
 <article class="group bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden hover:-translate-y-0.5">
-  <!-- Image placeholder — will be replaced with actual Guesty photos -->
   <a href={`/cabins/${cabin.slug}`} class="block">
-    <div class="relative h-52 md:h-56 bg-gradient-to-br from-lake-blue via-lake-blue-dark to-forest-green overflow-hidden">
-      <div class="absolute inset-0 flex items-center justify-center text-white/20 text-6xl font-heading">
-        {cabin.name.charAt(0)}
-      </div>
+    <div class="relative h-52 md:h-56 overflow-hidden bg-slate-200">
+      {heroUrl ? (
+        <img
+          src={heroUrl}
+          alt={cabin.name}
+          width="600"
+          height="400"
+          loading="lazy"
+          decoding="async"
+          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        />
+      ) : (
+        <div class="w-full h-full bg-gradient-to-br from-lake-blue via-lake-blue-dark to-forest-green flex items-center justify-center text-white/20 text-6xl font-heading">
+          {cabin.name.charAt(0)}
+        </div>
+      )}
       <div class="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/10 transition-colors duration-300" />
       {cabin.bookingUrl === null && (
         <span class="absolute top-3 right-3 bg-sunset-gold text-slate-900 text-xs font-heading font-semibold px-2.5 py-1 rounded">

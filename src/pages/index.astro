@@ -7,6 +7,7 @@ import AmenityIcon from "../components/AmenityIcon.astro";
 import CTABanner from "../components/CTABanner.astro";
 import { featuredCabins } from "../data/cabins";
 import { site } from "../data/site";
+import { homeHeroPhoto, resortPhotos } from "../data/photos";
 ---
 
 <BaseLayout title="Home">
@@ -17,6 +18,7 @@ import { site } from "../data/site";
     ctaText="Browse Cabins"
     ctaHref="/cabins"
     size="lg"
+    bgImage={homeHeroPhoto.url}
   />
 
   <!-- Intro -->
@@ -134,8 +136,16 @@ import { site } from "../data/site";
             Explore the Area
           </a>
         </div>
-        <div class="relative rounded-lg overflow-hidden h-72 md:h-96 bg-gradient-to-br from-lake-blue to-forest-green flex items-center justify-center">
-          <span class="text-white/20 font-heading text-xl">Map / Photo</span>
+        <div class="relative rounded-lg overflow-hidden h-72 md:h-96">
+          <img
+            src={resortPhotos.lake[0].url}
+            alt={resortPhotos.lake[0].alt}
+            width="800"
+            height="600"
+            loading="lazy"
+            decoding="async"
+            class="w-full h-full object-cover"
+          />
         </div>
       </div>
     </div>

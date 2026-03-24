@@ -3,35 +3,34 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 import SectionHeading from "../components/SectionHeading.astro";
 import CTABanner from "../components/CTABanner.astro";
+import { cabins } from "../data/cabins";
+import {
+  resortPhotos,
+  cabinPhotos,
+  guestyPhoto,
+  type ResortPhoto,
+} from "../data/photos";
 
-// Gallery sections with placeholder structure
-// Photos will be sourced from existing site and Guesty listings
-const gallerySections = [
-  {
-    title: "Resort & Grounds",
-    description: "Our lakefront property, pool, dock, fire pits, and common areas.",
-    count: 12,
-    gradient: "from-lake-blue to-lake-blue-dark",
-  },
-  {
-    title: "Lake & Views",
-    description: "Table Rock Lake sunsets, bluff views, and water activities.",
-    count: 8,
-    gradient: "from-lake-blue-dark to-forest-green",
-  },
-  {
-    title: "Cabins",
-    description: "Interior and exterior shots of our lakefront cabins.",
-    count: 12,
-    gradient: "from-forest-green to-lake-blue",
-  },
-  {
-    title: "Guest Photos",
-    description: "Memories shared by our guests — tagged #WeLoveHideaway.",
-    count: 8,
-    gradient: "from-sunset-gold to-cabin-brown",
-  },
+// Combine resort ground photos (pool, dock, fire pit, grounds, recreation)
+const resortGroundsPhotos: ResortPhoto[] = [
+  ...resortPhotos.pool,
+  ...resortPhotos.dock,
+  ...resortPhotos.firePit,
+  ...resortPhotos.grounds,
+  ...resortPhotos.recreation,
 ];
+
+// Lake & views photos
+const lakePhotos: ResortPhoto[] = resortPhotos.lake;
+
+// Cabin photos — hero shot from each cabin
+const cabinGalleryPhotos = cabinPhotos.map((cp) => {
+  const cabin = cabins.find((c) => c.slug === cp.slug);
+  return {
+    url: guestyPhoto(cp.hero, "gallery"),
+    alt: cabin ? cabin.name : cp.slug,
+  };
+});
 ---
 
 <BaseLayout
@@ -42,28 +41,99 @@ const gallerySections = [
     title="Photo Gallery"
     subtitle="Take a virtual tour of Hideaway Resort and Table Rock Lake."
     size="sm"
+    bgImage={resortPhotos.lake[2].url}
   />
 
-  {gallerySections.map((section, sIdx) => (
-    <section class:list={["section-padding", sIdx % 2 === 0 ? "bg-white" : "bg-slate-100"]}>
-      <div class="container-site">
-        <SectionHeading title={section.title} subtitle={section.description} />
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
-          {Array.from({ length: section.count }).map((_, i) => (
-            <div
-              class:list={[
-                "rounded-lg overflow-hidden aspect-[4/3] flex items-center justify-center bg-gradient-to-br",
-                section.gradient,
-                i === 0 && "md:col-span-2 md:row-span-2 aspect-square",
-              ]}
-            >
-              <span class="text-white/15 font-heading text-sm">Photo {i + 1}</span>
-            </div>
-          ))}
-        </div>
+  <!-- Resort & Grounds -->
+  <section class="section-padding bg-white">
+    <div class="container-site">
+      <SectionHeading
+        title="Resort & Grounds"
+        subtitle="Our lakefront property, pool, dock, fire pits, and common areas."
+      />
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+        {resortGroundsPhotos.map((photo, i) => (
+          <div
+            class:list={[
+              "rounded-lg overflow-hidden aspect-[4/3]",
+              i === 0 && "md:col-span-2 md:row-span-2 aspect-square",
+            ]}
+          >
+            <img
+              src={photo.url}
+              alt={photo.alt}
+              width="800"
+              height="600"
+              loading={i < 4 ? "eager" : "lazy"}
+              decoding="async"
+              class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+        ))}
       </div>
-    </section>
-  ))}
+    </div>
+  </section>
+
+  <!-- Lake & Views -->
+  <section class="section-padding bg-slate-100">
+    <div class="container-site">
+      <SectionHeading
+        title="Lake & Views"
+        subtitle="Table Rock Lake sunsets, bluff views, and water activities."
+      />
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+        {lakePhotos.map((photo, i) => (
+          <div
+            class:list={[
+              "rounded-lg overflow-hidden aspect-[4/3]",
+              i === 0 && "md:col-span-2 md:row-span-2 aspect-square",
+            ]}
+          >
+            <img
+              src={photo.url}
+              alt={photo.alt}
+              width="800"
+              height="600"
+              loading="lazy"
+              decoding="async"
+              class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Cabins -->
+  <section class="section-padding bg-white">
+    <div class="container-site">
+      <SectionHeading
+        title="Our Cabins"
+        subtitle="Interior and exterior shots of our lakefront cabins."
+      />
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+        {cabinGalleryPhotos.map((photo, i) => (
+          <div class="rounded-lg overflow-hidden aspect-[4/3] relative group">
+            <img
+              src={photo.url}
+              alt={photo.alt}
+              width="800"
+              height="600"
+              loading="lazy"
+              decoding="async"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
+              <span class="text-white text-sm font-heading font-semibold">{photo.alt}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="text-center mt-8">
+        <a href="/cabins" class="btn btn-primary">View All Cabins</a>
+      </div>
+    </div>
+  </section>
 
   <!-- #WeLoveHideaway -->
   <section class="section-padding bg-lake-blue-light">

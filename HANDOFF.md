@@ -16,11 +16,13 @@
 - Phase 4: All reusable components built (Header, Footer, Hero, CabinCard, AmenityIcon, CTABanner, SectionHeading, JsonLd)
 - Phase 5: SEO (sitemap via @astrojs/sitemap, robots.txt, JSON-LD for LodgingBusiness + Accommodation, OG tags, Twitter cards)
 
+### Completed (this session)
+- **Photography integrated:** All 13 cabin pages now show real Guesty CDN photos (hero + gallery). Home, Amenities, Location, and Gallery pages all use real resort photos from hideawayresort.com. Photo data centralized in `src/data/photos.ts` with Cloudinary transform presets for hero (1200x800), card (600x400), and gallery (800x600).
+
 ### Pending (requires Garrett)
-- **Push to GitHub:** Repo `garrett-ham-38336/hideaway-resort-website` — code has been pushed
+- **Push to GitHub:** Repo `garrett-ham-38336/hideaway-resort-website` — push latest changes
 - **Connect Cloudflare Pages:** Link the GitHub repo to Cloudflare Pages for auto-deployment
 - **GA4 Property:** Create a GA4 property and add the measurement ID to BaseLayout.astro
-- **Photography:** Replace gradient placeholders with actual resort/cabin photos
 - **Contact form backend:** The contact form markup is built; needs a form handler (Cloudflare Workers, or a service like Formspree)
 - **Custom domain:** Point hideawayresort.com DNS to Cloudflare Pages
 
@@ -41,6 +43,7 @@ src/
 │   └── SectionHeading.astro   — Section title + subtitle
 ├── data/
 │   ├── cabins.ts              — All 13 cabins with Guesty IDs, booking URLs, metadata
+│   ├── photos.ts              — Cabin + resort photo URLs (Guesty CDN + existing site)
 │   └── site.ts                — Site-wide config (contact, social, nav links)
 ├── layouts/
 │   └── BaseLayout.astro       — Root layout (head, fonts, OG tags, JSON-LD, header/footer)

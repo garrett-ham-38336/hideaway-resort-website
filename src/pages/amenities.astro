@@ -3,6 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 import SectionHeading from "../components/SectionHeading.astro";
 import CTABanner from "../components/CTABanner.astro";
+import { resortPhotos } from "../data/photos";
 ---
 
 <BaseLayout
@@ -13,6 +14,7 @@ import CTABanner from "../components/CTABanner.astro";
     title="Resort Amenities"
     subtitle="Everything you need for the perfect lake getaway — included with every cabin at Hideaway Resort."
     size="md"
+    bgImage={resortPhotos.pool[0].url}
   />
 
   <!-- Water & Dock -->
@@ -37,8 +39,16 @@ import CTABanner from "../components/CTABanner.astro";
             <li class="flex items-start gap-2"><span class="text-lake-blue font-bold">&#10003;</span> Foam noodles and water trampoline</li>
           </ul>
         </div>
-        <div class="rounded-lg overflow-hidden h-64 md:h-80 bg-gradient-to-br from-lake-blue to-lake-blue-dark flex items-center justify-center">
-          <span class="text-white/20 font-heading text-lg">Dock Photo</span>
+        <div class="rounded-lg overflow-hidden h-64 md:h-80">
+          <img
+            src={resortPhotos.dock[0].url}
+            alt={resortPhotos.dock[0].alt}
+            width="800"
+            height="600"
+            loading="lazy"
+            decoding="async"
+            class="w-full h-full object-cover"
+          />
         </div>
       </div>
     </div>
@@ -48,8 +58,16 @@ import CTABanner from "../components/CTABanner.astro";
   <section class="section-padding bg-slate-100">
     <div class="container-site">
       <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
-        <div class="order-2 md:order-1 rounded-lg overflow-hidden h-64 md:h-80 bg-gradient-to-br from-forest-green to-lake-blue flex items-center justify-center">
-          <span class="text-white/20 font-heading text-lg">Pool Photo</span>
+        <div class="order-2 md:order-1 rounded-lg overflow-hidden h-64 md:h-80">
+          <img
+            src={resortPhotos.pool[0].url}
+            alt={resortPhotos.pool[0].alt}
+            width="800"
+            height="600"
+            loading="lazy"
+            decoding="async"
+            class="w-full h-full object-cover"
+          />
         </div>
         <div class="order-1 md:order-2">
           <h2 class="font-heading text-2xl md:text-3xl font-bold text-slate-900 mb-4">

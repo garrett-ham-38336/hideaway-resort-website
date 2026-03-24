@@ -5,6 +5,7 @@ import JsonLd from "../../components/JsonLd.astro";
 import { cabins } from "../../data/cabins";
 import type { Cabin } from "../../data/cabins";
 import { site } from "../../data/site";
+import { getPhotosForCabin, guestyPhoto } from "../../data/photos";
 
 export function getStaticPaths() {
   return cabins.map((cabin) => ({
@@ -18,6 +19,11 @@ interface Props {
 }
 
 const { cabin } = Astro.props;
+const photos = getPhotosForCabin(cabin.slug);
+const heroUrl = photos ? guestyPhoto(photos.hero, "hero") : null;
+const galleryUrls = photos
+  ? photos.gallery.map((id) => guestyPhoto(id, "gallery"))
+  : [];
 
 const accommodationSchema = {
   "@context": "https://schema.org",
@@ -46,15 +52,26 @@ const accommodationSchema = {
 >
   <JsonLd slot="head" data={accommodationSchema} />
   <!-- Hero image area -->
-  <section class="relative h-64 md:h-96 bg-gradient-to-br from-lake-blue-dark via-lake-blue to-forest-green flex items-center justify-center">
-    <div class="absolute inset-0 flex items-center justify-center text-white/10 text-8xl font-heading">
-      {cabin.name.charAt(0)}
-    </div>
+  <section class="relative h-64 md:h-96 overflow-hidden flex items-center justify-center">
+    {heroUrl ? (
+      <img
+        src={heroUrl}
+        alt={`${cabin.name} at Hideaway Resort`}
+        width="1200"
+        height="800"
+        class="absolute inset-0 w-full h-full object-cover"
+      />
+    ) : (
+      <div class="absolute inset-0 bg-gradient-to-br from-lake-blue-dark via-lake-blue to-forest-green flex items-center justify-center text-white/10 text-8xl font-heading">
+        {cabin.name.charAt(0)}
+      </div>
+    )}
+    <div class="absolute inset-0 bg-slate-900/40" />
     <div class="relative z-10 text-center text-white">
-      <h1 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-2">
+      <h1 class="font-heading text-3xl md:text-4xl lg:text-5xl font-bold mb-2 drop-shadow-lg">
         {cabin.name}
       </h1>
-      <p class="text-lg text-white/80">{cabin.config} &middot; Sleeps {cabin.sleeps}</p>
+      <p class="text-lg text-white/90 drop-shadow">{cabin.config} &middot; Sleeps {cabin.sleeps}</p>
     </div>
   </section>
 
@@ -208,6 +225,32 @@ const accommodationSchema = {
       </div>
     </div>
   </section>
+
+  <!-- Photo Gallery -->
+  {galleryUrls.length > 0 && (
+    <section class="section-padding bg-slate-100">
+      <div class="container-site">
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-slate-900 mb-6 text-center">
+          More Photos
+        </h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          {galleryUrls.map((url, i) => (
+            <div class="rounded-lg overflow-hidden aspect-[4/3]">
+              <img
+                src={url}
+                alt={`${cabin.name} — photo ${i + 2}`}
+                width="800"
+                height="600"
+                loading="lazy"
+                decoding="async"
+                class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 
   <!-- Back to all cabins -->
   <section class="bg-slate-100 py-6">

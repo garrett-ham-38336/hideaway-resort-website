@@ -4,6 +4,7 @@ import Hero from "../components/Hero.astro";
 import SectionHeading from "../components/SectionHeading.astro";
 import CTABanner from "../components/CTABanner.astro";
 import { site } from "../data/site";
+import { resortPhotos } from "../data/photos";
 ---
 
 <BaseLayout
@@ -14,6 +15,7 @@ import { site } from "../data/site";
     title="Location &amp; Things to Do"
     subtitle="On a quiet peninsula of Table Rock Lake — with water on three sides and Branson just 30 minutes away."
     size="md"
+    bgImage={resortPhotos.lake[0].url}
   />
 
   <!-- Map & Getting There -->
