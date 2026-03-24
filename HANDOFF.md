@@ -17,7 +17,7 @@
 - Phase 5: SEO (sitemap via @astrojs/sitemap, robots.txt, JSON-LD for LodgingBusiness + Accommodation, OG tags, Twitter cards)
 
 ### Pending (requires Garrett)
-- **Push to GitHub:** Repo `ham38336/hideaway-resort-website` exists but code hasn't been pushed (needs GitHub auth token or manual push)
+- **Push to GitHub:** Repo `garrett-ham-38336/hideaway-resort-website` — code has been pushed
 - **Connect Cloudflare Pages:** Link the GitHub repo to Cloudflare Pages for auto-deployment
 - **GA4 Property:** Create a GA4 property and add the measurement ID to BaseLayout.astro
 - **Photography:** Replace gradient placeholders with actual resort/cabin photos
@@ -75,13 +75,13 @@ research/
 ### Step 1: Push code to GitHub
 ```bash
 cd /path/to/hideaway-resort-website
-git remote add origin https://github.com/ham38336/hideaway-resort-website.git
+git remote add origin https://github.com/garrett-ham-38336/hideaway-resort-website.git
 git push -u origin main
 ```
 
 ### Step 2: Connect to Cloudflare Pages
 1. Go to dash.cloudflare.com → Workers & Pages → Create
-2. Connect to Git → Select `ham38336/hideaway-resort-website`
+2. Connect to Git → Select `garrett-ham-38336/hideaway-resort-website`
 3. Build settings:
    - Build command: `npm run build`
    - Build output directory: `dist`
