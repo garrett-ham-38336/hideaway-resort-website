@@ -1,6 +1,6 @@
 ---
 import type { Cabin } from "../data/cabins";
-import { getPhotosForCabin, guestyPhoto } from "../data/photos";
+import { getPhotosForCabin } from "../data/photos";
 
 interface Props {
   cabin: Cabin;
@@ -8,7 +8,7 @@ interface Props {
 
 const { cabin } = Astro.props;
 const photos = getPhotosForCabin(cabin.slug);
-const heroUrl = photos ? guestyPhoto(photos.hero, "card") : null;
+const heroUrl = photos ? photos.card : null;
 ---
 
 <article class="group bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden hover:-translate-y-0.5">

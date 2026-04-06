@@ -5,7 +5,7 @@ import JsonLd from "../../components/JsonLd.astro";
 import { cabins } from "../../data/cabins";
 import type { Cabin } from "../../data/cabins";
 import { site } from "../../data/site";
-import { getPhotosForCabin, guestyPhoto } from "../../data/photos";
+import { getPhotosForCabin } from "../../data/photos";
 
 export function getStaticPaths() {
   return cabins.map((cabin) => ({
@@ -20,10 +20,8 @@ interface Props {
 
 const { cabin } = Astro.props;
 const photos = getPhotosForCabin(cabin.slug);
-const heroUrl = photos ? guestyPhoto(photos.hero, "hero") : null;
-const galleryUrls = photos
-  ? photos.gallery.map((id) => guestyPhoto(id, "gallery"))
-  : [];
+const heroUrl = photos ? photos.hero : null;
+const galleryUrls = photos ? photos.gallery : [];
 
 const accommodationSchema = {
   "@context": "https://schema.org",
@@ -186,7 +184,7 @@ const accommodationSchema = {
               </div>
               <div class="flex justify-between">
                 <dt class="text-slate-500">Check-in</dt>
-                <dd class="font-medium text-slate-900">3:00 PM</dd>
+                <dd class="font-medium text-slate-900">4:00 PM</dd>
               </div>
               <div class="flex justify-between">
                 <dt class="text-slate-500">Check-out</dt>
