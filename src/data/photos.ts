@@ -43,13 +43,14 @@ export const cabinPhotos: CabinPhotos[] = [
   cabinPaths("red-cedar-cabin", 4),
   cabinPaths("dogwood-cabin", 4),
   cabinPaths("crest-view-cabin", 4),
-  cabinPaths("unit-7-cabin", 4),
+  cabinPaths("blue-heron-cabin", 4),
   cabinPaths("skyline-cabin", 4),
   cabinPaths("trails-end-cabin", 4),
   cabinPaths("rock-haven-cottage", 4),
   cabinPaths("hideaway-lodge", 4),
   cabinPaths("love-shack", 4),
   cabinPaths("duplex-cabin", 4),
+  cabinPaths("rent-a-lake", 0),
 ];
 
 /** Utility: get photos for a cabin by slug */

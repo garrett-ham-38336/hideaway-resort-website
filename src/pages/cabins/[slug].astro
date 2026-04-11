@@ -103,7 +103,14 @@ const accommodationSchema = {
           rel="noopener noreferrer"
           class="btn btn-cta"
         >
-          Book This Cabin
+          {cabin.slug === "rent-a-lake" ? "Book the Resort" : "Book This Cabin"}
+        </a>
+      ) : cabin.slug === "rent-a-lake" ? (
+        <a
+          href="/contact"
+          class="btn btn-cta"
+        >
+          Contact to Book
         </a>
       ) : (
         <span class="btn bg-slate-100 text-slate-500 border-slate-300 cursor-default">
@@ -140,6 +147,23 @@ const accommodationSchema = {
                 Trails End — into one spacious 4-bedroom, 2-bathroom property that
                 sleeps up to 16 guests. Perfect for family reunions, group retreats,
                 and large gatherings. Dogs welcome (up to 2, with prior approval).
+              </p>
+            </div>
+          )}
+
+          {cabin.slug === "rent-a-lake" && (
+            <div class="bg-lake-blue-light border border-lake-blue/20 rounded-lg p-5 mb-6">
+              <h3 class="font-heading text-base font-semibold text-slate-900 mb-2">
+                The Whole Resort — Exclusively Yours
+              </h3>
+              <p class="text-sm text-slate-700 leading-relaxed">
+                Rent-A-Lake gives your group exclusive access to all 12 cabins at
+                Hideaway Resort — 26 bedrooms, 16 bathrooms, and room for over 80
+                guests. You'll have the private dock, swimming pool, kayaks,
+                paddleboards, fire pits, pavilions, and every resort amenity all to
+                yourselves. Ideal for family reunions, corporate retreats, wedding
+                weekends, and milestone celebrations. Contact us for pricing and
+                availability.
               </p>
             </div>
           )}
@@ -208,6 +232,13 @@ const accommodationSchema = {
                 class="btn btn-cta w-full text-center"
               >
                 Book {cabin.name}
+              </a>
+            ) : cabin.slug === "rent-a-lake" ? (
+              <a
+                href="/contact"
+                class="btn btn-cta w-full text-center"
+              >
+                Contact to Book the Resort
               </a>
             ) : (
               <p class="text-sm text-slate-500 text-center">
