@@ -5,11 +5,14 @@ import CabinCard from "../../components/CabinCard.astro";
 import CTABanner from "../../components/CTABanner.astro";
 import { cabins } from "../../data/cabins";
 
+const individualCabins = cabins.filter((c) => c.slug !== "rent-a-lake");
+const rentALake = cabins.find((c) => c.slug === "rent-a-lake");
+
 const bedroomGroups = [
-  { label: "1 Bedroom", count: 1, units: cabins.filter((c) => c.bedrooms === 1) },
-  { label: "2 Bedroom", count: 2, units: cabins.filter((c) => c.bedrooms === 2) },
-  { label: "3 Bedroom", count: 3, units: cabins.filter((c) => c.bedrooms === 3) },
-  { label: "4 Bedroom", count: 4, units: cabins.filter((c) => c.bedrooms === 4) },
+  { label: "1 Bedroom", count: 1, units: individualCabins.filter((c) => c.bedrooms === 1) },
+  { label: "2 Bedroom", count: 2, units: individualCabins.filter((c) => c.bedrooms === 2) },
+  { label: "3 Bedroom", count: 3, units: individualCabins.filter((c) => c.bedrooms === 3) },
+  { label: "4 Bedroom", count: 4, units: individualCabins.filter((c) => c.bedrooms === 4) },
 ];
 ---
 
@@ -56,6 +59,22 @@ const bedroomGroups = [
       </section>
     )
   ))}
+
+  {rentALake && (
+    <section id="whole-resort" class="section-padding bg-lake-blue-light border-t border-lake-blue/20">
+      <div class="container-site">
+        <h2 class="font-heading text-xl md:text-2xl font-bold text-slate-900 mb-2">
+          Book the Whole Resort
+        </h2>
+        <p class="text-slate-600 mb-6 md:mb-8 max-w-2xl">
+          Want Hideaway Resort all to yourself? Rent-A-Lake gives your group exclusive access to every cabin, the private dock, pool, and all resort amenities.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <CabinCard cabin={rentALake} />
+        </div>
+      </div>
+    </section>
+  )}
 
   <CTABanner
     title="Need Help Choosing?"

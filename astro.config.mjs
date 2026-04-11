@@ -8,7 +8,8 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://hideawayresort.com',
   redirects: {
-    '/cabins/unit-7-cabin': '/cabins/blue-heron-cabin',
+    '/cabins/unit-7-cabin': '/cabins/blue-heron-cabin/',
+    '/cabins/unit-7-cabin/': '/cabins/blue-heron-cabin/',
   },
   vite: {
     plugins: [tailwindcss()]
