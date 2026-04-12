@@ -30,9 +30,14 @@ const heroUrl = photos ? photos.card : null;
         </div>
       )}
       <div class="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/10 transition-colors duration-300" />
-      {cabin.bookingUrl === null && (
+      {cabin.bookingUrl === null && cabin.slug !== "rent-a-lake" && (
         <span class="absolute top-3 right-3 bg-sunset-gold text-slate-900 text-xs font-heading font-semibold px-2.5 py-1 rounded">
           Coming Soon
+        </span>
+      )}
+      {cabin.slug === "rent-a-lake" && (
+        <span class="absolute top-3 right-3 bg-lake-blue text-white text-xs font-heading font-semibold px-2.5 py-1 rounded">
+          Entire Resort
         </span>
       )}
       {cabin.petFriendly && (
@@ -66,7 +71,7 @@ const heroUrl = photos ? photos.card : null;
       <a href={`/cabins/${cabin.slug}`} class="btn btn-primary btn-sm flex-1 text-center">
         View Details
       </a>
-      {cabin.bookingUrl && (
+      {cabin.bookingUrl ? (
         <a
           href={cabin.bookingUrl}
           target="_blank"
@@ -75,7 +80,11 @@ const heroUrl = photos ? photos.card : null;
         >
           Book Now
         </a>
-      )}
+      ) : cabin.slug === "rent-a-lake" ? (
+        <a href="/contact" class="btn btn-cta btn-sm">
+          Contact to Book
+        </a>
+      ) : null}
     </div>
   </div>
 </article>
