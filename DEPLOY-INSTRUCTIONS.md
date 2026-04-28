@@ -1,5 +1,7 @@
 # Hideaway Resort Website — Deploy Instructions
 
+This site is deployed to **Cloudflare Pages** (project: `hideaway-resort-website`), which serves `hideawayresort.com`. Deploy with `wrangler pages deploy` — *not* `wrangler deploy` (the latter creates a separate Worker that does not update the production domain).
+
 Run these steps in order with Claude Code to download resort photos, replace the hero video, and deploy.
 
 ## Step 1: Download Resort Photos from Guesty CDN
